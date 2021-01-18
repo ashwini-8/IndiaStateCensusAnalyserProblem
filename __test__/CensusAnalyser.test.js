@@ -45,8 +45,15 @@ describe('Sort data by state ', () => {
 
     test('givenStateCensusData_WhenSortedByPopulation_ShouldReportSortedFormat', () => {
         return censusAnalyser.sortByPopulation(INDIA_STATE_CENSUS_CSV).then(data => {
-            expect(data[0].State).toBe('Uttarakhand');
-            expect(data[28].State).toBe('West Bengal');
+            expect(data[0].Population).toBe('10116752');
+            expect(data[28].Population).toBe('91347736');
         })
     })
+
+    test('givenStateCensusData_WhenSortedByPopulationDensity_ShouldReportSortedFormat', () => {
+        return censusAnalyser.sortByPopulationDensity(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].DensityPerSqKm).toBe('1029');
+            expect(data[28].DensityPerSqKm).toBe('86');
+        });
+    });
 })
