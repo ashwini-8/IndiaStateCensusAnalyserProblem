@@ -67,7 +67,7 @@ class CensusAnalyser {
                             return 0
                         }
                     })
-                    console.log('sorted data :', data)
+                    //console.log('sorted data :', data)
                     write(data)
                     resolve(data);
                 })

@@ -34,3 +34,13 @@ describe('testsForIndiaStateCensusCSV', () => {
         .catch(error => expect(error.message).toBe('Invalid Delimiter Exception'))
     });
 })
+
+describe('Sort data by state ', () => {
+    const indiaStatecode = new IndiaStatecode()
+    test('givenStateCensusFile_WhenDataStoredInSorted_TestShouldPass', () =>{
+        return indiaStatecode.sortByStateCode(INDIA_STATE_CODE).then(data => {
+            expect(data[0].StateCode).toBe('AD')
+            expect(data[36].StateCode).toBe('WB')
+        })
+    })
+})

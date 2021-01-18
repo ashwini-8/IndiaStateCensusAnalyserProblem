@@ -1,6 +1,7 @@
 const fs = require('fs')
 var path = require('path');
 const csv = require('csv-parser')
+const writeToJson = require('../main/index')
 
 class IndiaStatecode {
   constructor() {
@@ -32,5 +33,27 @@ class IndiaStatecode {
             
     })
   }
+
+  sortByStateCode(file) {
+    return new Promise((resolve, reject) => {
+        this.indiaStateCodefunction(file)
+            .then(data => {
+              data.sort((data1, data2) => {
+                  let stateCode1 = data1.StateCode
+                  let stateCode2 = data2.StateCode
+                  if(stateCode1 < stateCode2) {
+                      return -1
+                  } else if(stateCode1 > stateCode2) {
+                          return 1
+                    } else {
+                          return 0
+                      }
+                  })
+                  //console.log('sorted data :', data)
+                  writeToJson(data)
+                  resolve(data);
+            })
+    })
+  } 
 }
 module.exports = IndiaStatecode;
