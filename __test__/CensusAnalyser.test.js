@@ -42,4 +42,11 @@ describe('Sort data by state ', () => {
             expect(data[28].State).toBe('West Bengal')
         })
     })
+
+    test('givenStateCensusData_WhenSortedByPopulation_ShouldReportSortedFormat', () => {
+        return censusAnalyser.sortByPopulation(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].State).toBe('Uttarakhand');
+            expect(data[28].State).toBe('West Bengal');
+        })
+    })
 })

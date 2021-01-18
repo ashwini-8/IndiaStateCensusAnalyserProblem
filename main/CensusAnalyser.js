@@ -73,6 +73,29 @@ class CensusAnalyser {
                 })
         })
     } 
+
+    sortByPopulation(file) {
+        return new Promise((resolve, reject) => {
+            this.indiaStateAnalyser(file)
+                .then(data => {
+                data.sort((data1, data2) => {
+
+                    let state1 = data1.Population
+                    let state2 = data2.Population
+                    if(state1 < state2) {
+                        return -1
+                    } else if(state1 > state2) {
+                            return 1
+                        } else {
+                            return 0
+                        }
+                    })
+                    //console.log('sorted data :', data)
+                    write(data)
+                    resolve(data);
+                })
+        })
+    }
 }
 module.exports = CensusAnalyser;
 
