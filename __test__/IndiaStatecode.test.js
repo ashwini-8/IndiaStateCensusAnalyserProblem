@@ -14,10 +14,10 @@ describe('testsForIndiaStateCensusCSV', () => {
         .then(data => expect(data.length).toEqual(37));
     })
     
-   test('givenStateCensusFile_WhenFileFoundIncorrect_ShouldThrowCustomWrongFilePathException', () => {
-        return nosuchfileInvalidExtension(INDIA_STATE_CODE_WRONG_FILE_PATH)
+   test('givenStateCensusFile_WhenFileFoundIncorrect_ShouldThrowCustomWrongFilePathException', async () => {
+        return  nosuchfileInvalidExtension(INDIA_STATE_CODE_WRONG_FILE_PATH)
         .catch(error => expect(error.message).toBe('Invalid file path Exception'))
-    }, 15000)
+    },10000)
     
     test('givenStateCensusFile_WhenFileFoundWithIncorrectExtension_ShouldThrowCustomException', () => {
         return nosuchfileInvalidExtension(INDIA_STATE_CODE_WRONG_EXTENSION)

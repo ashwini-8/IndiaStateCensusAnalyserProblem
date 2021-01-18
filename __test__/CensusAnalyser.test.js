@@ -7,8 +7,8 @@ const INDIA_STATE_CENSUS_CSV_WRONG_DELIMITER = "C:\\Users\\ashwi\\Desktop\\Bridg
 const INDIA_STATE_CENSUS_CSV_WRONG_HEADER= "C:\\Users\\ashwi\\Desktop\\Bridgelabz\\JavaScript\\Assignments\\IndiaStateCensusAnalyserProblem\\main\\WrongHeaderIndiaStateCensusData.csv"
 describe('testsForIndiaStateCensusCSV', () => {
 
+    const censusAnalyser = new CensusAnalyser();
     test('givenStateCensusFile_ShouldReturnfileLength',() => { 
-        const censusAnalyser = new CensusAnalyser()
         return censusAnalyser.indiaStateAnalyser(INDIA_STATE_CENSUS_CSV)
         .then(data =>expect(data.length).toEqual(29))
     })
@@ -24,15 +24,22 @@ describe('testsForIndiaStateCensusCSV', () => {
     })
     
     test('givenStateCensusFile_WhenHeaderMisMatched_shouldThrowWrongHeaderException', () => {
-        const censusAnalyser = new CensusAnalyser();
         return censusAnalyser.indiaStateAnalyser(INDIA_STATE_CENSUS_CSV_WRONG_HEADER)
         .catch(error => expect(error.message).toBe('Invalid Header Exception'))
     })
     
     test('givenStateCensusFileIfCorrect_ButDelimitterIncorrect_ShouldThrowWrongDelimiterException', () => {
-        const censusAnalyser = new CensusAnalyser();
-        return censusAnalyser.indiaStateAnalyser(INDIA_STATE_CENSUS_CSV_WRONG_DELIMITER)
+       return censusAnalyser.indiaStateAnalyser(INDIA_STATE_CENSUS_CSV_WRONG_DELIMITER)
         .catch(error => expect(error.message).toBe('Invalid Delimiter Exception'))
-    });
+    })
+})
 
+describe('Sort data by state ', () => {
+    const censusAnalyser = new CensusAnalyser();
+    test('givenStateCensusFile_WhenDataStoredInSorted_TestShouldPass', () =>{
+        return censusAnalyser.sortByState(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].State).toBe('Andhra Pradesh')
+            expect(data[28].State).toBe('West Bengal')
+        })
+    })
 })
